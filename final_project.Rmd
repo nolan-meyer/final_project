@@ -1,0 +1,39 @@
+---
+title: "Insert title"
+author: "Nolan, Omar, Ben, Pablo"
+output: 
+  html_document:
+    df_print: paged
+    code_download: true
+    theme: cerulean
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# Introduction
+
+
+## Introduction to topic/data
+
+## Research Questions
+
+
+
+# Data Collection
+
+
+## Data Sources
+
+## Collection process
+
+
+
+# Analysis
+
+```{r}
+
+```
+
