@@ -1,7 +1,9 @@
 library(shiny)
 library(tidyverse)
+
 player_data <- read_csv("Data Sci - MSOC Data - Player Data.csv")
 team_data <- read_csv("Data Sci - MSOC Data - Team Data.csv")
+
 
 ui <- fluidPage(
   sliderInput(inputId = "Season", 
@@ -14,6 +16,11 @@ ui <- fluidPage(
             "Player", 
             value = "", 
             placeholder = "Anwar, Omar"),
+  varSelectInput(inputId = "variable",
+                 label = "Select Stat",
+                 data = player_data,
+                 selected = "G",
+                 multiple = FALSE),
   submitButton(text = "Create my plot!"),
   plotOutput(outputId = "timeplot")
 )
@@ -23,7 +30,7 @@ server <- function(input, output) {
     player_data %>% 
       filter(Player == input$Player) %>% 
       ggplot() +
-      geom_line(aes(x = Season, y = G)) +
+      geom_line(aes(x = Season, y = !!input$variable)) +
       scale_x_continuous(limits = input$Season) +
       theme_minimal()
   })
