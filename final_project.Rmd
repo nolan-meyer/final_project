@@ -15,6 +15,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r libraries}
 library(tidyverse)
 library(googlesheets4)
+library(rsconnect)
 ```
 
 
