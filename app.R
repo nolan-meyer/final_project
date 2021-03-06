@@ -23,8 +23,16 @@ ui <- fluidPage(
                                  data = player_data,
                                  selected = "G",
                                  multiple = FALSE),
-                  textInput("Player", 
+                  textInput("player1", 
                             "Player 1", 
+                            value = "", 
+                            placeholder = "Anwar, Omar"),
+                  textInput("player2", 
+                            "Player 2", 
+                            value = "", 
+                            placeholder = "Anwar, Omar"),
+                  textInput("player3", 
+                            "Player 3", 
                             value = "", 
                             placeholder = "Anwar, Omar"),
                   sliderInput(inputId = "Season", 
@@ -51,9 +59,13 @@ server <- function(input, output) {
   
   output$timeplot <- renderPlot({
     player_data %>% 
-      filter(Player == input$Player) %>% 
+      filter(Player %in% c(input$player1, input$player2, input$player3)) %>% 
       ggplot() +
-      geom_path(aes(x = Season, y = !!input$variables)) +
+      geom_line(aes(x = Season, 
+                    y = !!input$variables, 
+                    color = Player),
+                alpha = 0.4, 
+                size = 4) +
       scale_x_continuous(limits = input$Season) +
       theme_minimal()
   })
