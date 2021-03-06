@@ -22,7 +22,7 @@ ui <- fluidPage(
                   varSelectInput(inputId = "variables",
                                  label = "Select Stat",
                                  data = player_data,
-                                 selected = "G",
+                                 selected = "Goals",
                                  multiple = FALSE),
                   textInput("player1", 
                             "Player 1", 
@@ -50,12 +50,12 @@ ui <- fluidPage(
                  varSelectInput(inputId = "xvar",
                                 label = "X Axis Stat",
                                 data = player_data,
-                                selected = "G",
+                                selected = "Goals",
                                 multiple = FALSE),
                  varSelectInput(inputId = "yvar",
                                 label = "Y Axis Stat",
                                 data = player_data,
-                                selected = "A",
+                                selected = "Assists",
                                 multiple = FALSE),
                  submitButton(text = "Create plot")),
                mainPanel(
@@ -79,7 +79,7 @@ server <- function(input, output) {
     player_data %>% 
       filter(Player %in% c(input$player1, input$player2, input$player3)) %>% 
       ggplot() +
-      geom_point(aes(x = Season, 
+      geom_line(aes(x = Season, 
                      y = !!input$variables, 
                      color = Player),
                 alpha = 0.6, 
@@ -87,8 +87,8 @@ server <- function(input, output) {
       geom_text(aes(x = Season,
                     y = !!input$variables,
                     label = Player), 
-                hjust=0,
-                vjust=0) +
+                hjust = 0,
+                vjust = 0) +
       scale_x_continuous(limits = input$Season) +
       theme_minimal() 
     })
@@ -97,6 +97,7 @@ server <- function(input, output) {
       p <- player_data %>% 
         ggplot(aes(x = !!input$xvar,
                    y = !!input$yvar,
+                   color = factor(Season),
                    group = Player,
                    label = Season)) +
         geom_jitter()
