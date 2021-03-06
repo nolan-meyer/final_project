@@ -1,5 +1,6 @@
 library(shiny)
 library(tidyverse)
+library(plotly)
 
 player_data <- read_csv("Data Sci - MSOC Data - Player Data.csv")
 team_data <- read_csv("Data Sci - MSOC Data - Team Data.csv")
@@ -58,7 +59,7 @@ ui <- fluidPage(
                                 multiple = FALSE),
                  submitButton(text = "Create plot")),
                mainPanel(
-                 plotOutput(outputId = "scatterplot")
+                 plotlyOutput(outputId = "scatterplot")
                )
              ))
   ))
@@ -92,11 +93,15 @@ server <- function(input, output) {
       theme_minimal() 
     })
     
-    output$scatterplot <- renderPlot({
-      player_data %>% 
-        ggplot() +
-        geom_point(aes(x = !!input$xvar,
-                       y = !!input$yvar))
+    output$scatterplot <- renderPlotly({
+      p <- player_data %>% 
+        ggplot(aes(x = !!input$xvar,
+                   y = !!input$yvar,
+                   group = Player,
+                   label = Season)) +
+        geom_jitter()
+      ggplotly(p,
+               tooltip = c("x", "y", "group", "label"))
         })
 }
 
