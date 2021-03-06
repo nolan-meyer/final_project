@@ -58,13 +58,18 @@ server <- function(input, output) {
     player_data %>% 
       filter(Player %in% c(input$player1, input$player2, input$player3)) %>% 
       ggplot() +
-      geom_line(aes(x = Season, 
+      geom_point(aes(x = Season, 
                     y = !!input$variables, 
                     color = Player),
                 alpha = 0.6, 
-                size = 3) +
+                size = 3)+
       scale_x_continuous(limits = input$Season) +
-      theme_minimal()
+      theme_minimal()+
+      geom_text(aes(x= Season,
+                    y= !!input$variables,
+                    label=Player), 
+                hjust=0,
+                vjust=0)
   })
 }
 
