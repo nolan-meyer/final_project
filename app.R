@@ -25,16 +25,13 @@ ui <- fluidPage(
                                  multiple = FALSE),
                   textInput("player1", 
                             "Player 1", 
-                            value = "", 
-                            placeholder = "Anwar, Omar"),
+                            value = "Burke, Jake"),
                   textInput("player2", 
                             "Player 2", 
-                            value = "", 
-                            placeholder = "Anwar, Omar"),
+                            value = "Spurr, Charlie"),
                   textInput("player3", 
                             "Player 3", 
-                            value = "", 
-                            placeholder = "Anwar, Omar"),
+                            value = "Moore, Nick"),
                   sliderInput(inputId = "Season", 
                               label = "Seasons",
                               min = 2012, 
@@ -64,8 +61,8 @@ server <- function(input, output) {
       geom_line(aes(x = Season, 
                     y = !!input$variables, 
                     color = Player),
-                alpha = 0.4, 
-                size = 4) +
+                alpha = 0.6, 
+                size = 3) +
       scale_x_continuous(limits = input$Season) +
       theme_minimal()
   })
