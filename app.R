@@ -15,7 +15,7 @@ ui <- fluidPage(
              DT::dataTableOutput('players')),
     tabPanel('Team Data', 
              DT::dataTableOutput('teams')),
-    tabPanel('Plots', 
+    tabPanel('Player Time Series', 
              sidebarLayout(
                sidebarPanel(
                   varSelectInput(inputId = "variables",
@@ -41,11 +41,31 @@ ui <- fluidPage(
                submitButton(text = "Create plot")),
                mainPanel(
                   plotOutput(outputId = "timeplot"))
+             )),
+    tabPanel('Team Plots'),
+    tabPanel('Scatter Plot',
+             sidebarLayout(
+               sidebarPanel(
+                 varSelectInput(inputId = "xvar",
+                                label = "X Axis Stat",
+                                data = player_data,
+                                selected = "G",
+                                multiple = FALSE),
+                 varSelectInput(inputId = "yvar",
+                                label = "Y Axis Stat",
+                                data = player_data,
+                                selected = "A",
+                                multiple = FALSE),
+                 submitButton(text = "Create plot")),
+               mainPanel(
+                 plotOutput(outputId = "scatterplot")
+               )
              ))
   ))
   
 
 server <- function(input, output) {
+  
   output$players <- DT::renderDataTable(
     DT::datatable(player_data, options = list(pageLength = 10)
   ))
@@ -59,18 +79,25 @@ server <- function(input, output) {
       filter(Player %in% c(input$player1, input$player2, input$player3)) %>% 
       ggplot() +
       geom_point(aes(x = Season, 
-                    y = !!input$variables, 
-                    color = Player),
+                     y = !!input$variables, 
+                     color = Player),
                 alpha = 0.6, 
-                size = 3)+
-      scale_x_continuous(limits = input$Season) +
-      theme_minimal()+
-      geom_text(aes(x= Season,
-                    y= !!input$variables,
-                    label=Player), 
+                size = 3) +
+      geom_text(aes(x = Season,
+                    y = !!input$variables,
+                    label = Player), 
                 hjust=0,
-                vjust=0)
-  })
+                vjust=0) +
+      scale_x_continuous(limits = input$Season) +
+      theme_minimal() 
+    })
+    
+    output$scatterplot <- renderPlot({
+      player_data %>% 
+        ggplot() +
+        geom_point(aes(x = !!input$xvar,
+                       y = !!input$yvar))
+        })
 }
 
 shinyApp(ui = ui, server = server)
