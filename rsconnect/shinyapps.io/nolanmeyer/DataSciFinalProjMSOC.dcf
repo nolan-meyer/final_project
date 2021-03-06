@@ -5,8 +5,8 @@ account: nolanmeyer
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 3744434
-bundleId: 4309521
+bundleId: 4309540
 url: https://nolanmeyer.shinyapps.io/DataSciFinalProjMSOC/
-when: 1615052745.8514
+when: 1615053281.05544
 asMultiple: FALSE
 asStatic: FALSE
