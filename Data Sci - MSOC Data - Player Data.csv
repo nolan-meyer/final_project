@@ -1,4 +1,4 @@
-Season,Player,GP,GS,MIN,G,A,PTS,SH,SH%,SOG,SOG%,YC,RC,GW,PG,PA,Goals Per 90 ,Assists Per 90,Points Per 90,Yellow Cards Per 90
+Season,Player,Games Played,Games Started,Minutes Played,Goals,Assists,Points,Shots,Shot %,Shots On Goal,Shots On Goal %,Yellow Cards,Red Cards,Game Winners,Penalty Kick Goals,Penalty Kick Attempts,Goals Per 90 ,Assists Per 90,Points Per 90,Yellow Cards Per 90
 2019,"Moore, Nick",18,18,1211,4,4,12,39,0.103,15,0.385,2,0,0,0,1,0.297,0.297,0.892,0.149
 2019,"Bajek, Chris",18,18,1043,4,1,9,31,0.129,14,0.452,0,0,2,0,0,0.345,0.086,0.777,0.000
 2019,"Krom, Floyd",18,8,749,3,2,8,21,0.143,10,0.476,3,0,2,0,0,0.360,0.240,0.961,0.360
