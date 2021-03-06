@@ -1,1 +1,3 @@
-# final_project
+# Final Project
+
+Shiny url: https://nolanmeyer.shinyapps.io/DataSciFinalProjMSOC/
