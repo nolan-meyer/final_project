@@ -41,9 +41,37 @@ ui <- fluidPage(
                               sep = ""),
                submitButton(text = "Create plot")),
                mainPanel(
-                  plotOutput(outputId = "timeplot"))
+                  plotOutput(outputId = "playerplot"))
              )),
-    tabPanel('Team Plots'),
+    tabPanel('Team Time Series',
+             sidebarLayout(
+               sidebarPanel(
+                 varSelectInput(inputId = "y_var1",
+                                label = "Stat 1",
+                                data = team_data,
+                                selected = "Goals For",
+                                multiple = FALSE),
+                 varSelectInput(inputId = "y_var2",
+                                label = "Stat 2",
+                                data = team_data,
+                                selected = "Goals Against",
+                                multiple = FALSE),
+                 varSelectInput(inputId = "y_var3",
+                                label = "Stat 3",
+                                data = team_data,
+                                selected = "Wins",
+                                multiple = FALSE),
+                 sliderInput(inputId = "season", 
+                             label = "Seasons",
+                             min = 2012, 
+                             max = 2019, 
+                             value = c(2012,2019),
+                             sep = ""),
+                 submitButton(text = "Create plot")),
+               mainPanel(
+                 plotOutput(outputId = "teamplot")))
+             )
+             ,
     tabPanel('Scatter Plot',
              sidebarLayout(
                sidebarPanel(
@@ -75,13 +103,13 @@ server <- function(input, output) {
     DT::datatable(team_data, options = list(pageLength = 10)
     ))
   
-  output$timeplot <- renderPlot({
+  output$playerplot <- renderPlot({
     player_data %>% 
       filter(Player %in% c(input$player1, input$player2, input$player3)) %>% 
       ggplot() +
       geom_line(aes(x = Season, 
-                     y = !!input$variables, 
-                     color = Player),
+                    y = !!input$variables, 
+                    color = Player),
                 alpha = 0.6, 
                 size = 3) +
       geom_text(aes(x = Season,
@@ -93,6 +121,20 @@ server <- function(input, output) {
       theme_minimal() 
     })
     
+  output$teamplot <- renderPlot({
+    team_data %>% 
+      ggplot(aes(x = Season)) +
+      geom_line(aes(y = !!input$y_var1),
+                color = "blue") +
+      geom_line(aes(y = !!input$y_var2),
+                color = "green") +
+      geom_line(aes(y = !!input$y_var3),
+                color = "red") +
+      scale_x_continuous(limits = input$season) +
+      labs(y = "") +
+      theme_minimal()
+  })
+  
     output$scatterplot <- renderPlotly({
       p <- player_data %>% 
         ggplot(aes(x = !!input$xvar,
@@ -100,7 +142,8 @@ server <- function(input, output) {
                    color = factor(Season),
                    group = Player,
                    label = Season)) +
-        geom_jitter()
+        geom_jitter() +
+        theme_minimal()
       ggplotly(p,
                tooltip = c("x", "y", "group", "label"))
         })
