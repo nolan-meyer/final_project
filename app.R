@@ -4,6 +4,9 @@ library(tidyverse)
 player_data <- read_csv("Data Sci - MSOC Data - Player Data.csv")
 team_data <- read_csv("Data Sci - MSOC Data - Team Data.csv")
 
+stats <- t(t(colnames(player_data[3:21])))
+
+
 
 ui <- fluidPage(
   navbarPage(
@@ -15,22 +18,22 @@ ui <- fluidPage(
     tabPanel('Plots', 
              sidebarLayout(
                sidebarPanel(
+                  varSelectInput(inputId = "variables",
+                                 label = "Select Stat",
+                                 data = player_data,
+                                 selected = "G",
+                                 multiple = FALSE),
+                  textInput("Player", 
+                            "Player 1", 
+                            value = "", 
+                            placeholder = "Anwar, Omar"),
                   sliderInput(inputId = "Season", 
                               label = "Seasons",
                               min = 2012, 
                               max = 2019, 
                               value = c(2012,2019),
                               sep = ""),
-                  textInput("Player", 
-                            "Player", 
-                            value = "", 
-                            placeholder = "Anwar, Omar"),
-                  varSelectInput(inputId = "variable",
-                                  label = "Select Stat",
-                                  data = player_data,
-                                  selected = "G",
-                                  multiple = FALSE),
-               submitButton(text = "Create my plot!")),
+               submitButton(text = "Create plot")),
                mainPanel(
                   plotOutput(outputId = "timeplot"))
              ))
@@ -50,7 +53,7 @@ server <- function(input, output) {
     player_data %>% 
       filter(Player == input$Player) %>% 
       ggplot() +
-      geom_path(aes(x = Season, y = !!input$variable)) +
+      geom_path(aes(x = Season, y = !!input$variables)) +
       scale_x_continuous(limits = input$Season) +
       theme_minimal()
   })
