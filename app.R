@@ -25,24 +25,24 @@ ui <- fluidPage(
              sidebarLayout(
                sidebarPanel(
                   varSelectInput(inputId = "variables",
-                                 label = "Select Stat",
+                                 label = "Select Stat:",
                                  data = player_data,
                                  selected = "Goals",
                                  multiple = FALSE),
                   selectInput(inputId = "player1", 
-                            label = "Player 1", 
+                            label = "Player 1:", 
                             choices = player_list,
                             selected = "Moore, Nick"),
                   selectInput(inputId = "player2", 
-                              label = "Player 2", 
+                              label = "Player 2:", 
                               choices = player_list,
                               selected = "Burke, Jake"),
                   selectInput(inputId = "player3", 
-                              label = "Player 3", 
+                              label = "Player 3:", 
                               choices = player_list,
                               selected = "Spurr, Charlie"),
                   sliderInput(inputId = "Season", 
-                              label = "Seasons",
+                              label = "Seasons:",
                               min = 2012, 
                               max = 2019, 
                               value = c(2012,2019),
@@ -55,22 +55,22 @@ ui <- fluidPage(
              sidebarLayout(
                sidebarPanel(
                  varSelectInput(inputId = "y_var1",
-                                label = "Stat 1",
+                                label = "Stat 1:",
                                 data = team_data,
                                 selected = "Goals For",
                                 multiple = FALSE),
                  varSelectInput(inputId = "y_var2",
-                                label = "Stat 2",
+                                label = "Stat 2:",
                                 data = team_data,
                                 selected = "Goals Against",
                                 multiple = FALSE),
                  varSelectInput(inputId = "y_var3",
-                                label = "Stat 3",
+                                label = "Stat 3:",
                                 data = team_data,
                                 selected = "Wins",
                                 multiple = FALSE),
                  sliderInput(inputId = "season", 
-                             label = "Seasons",
+                             label = "Seasons:",
                              min = 2012, 
                              max = 2019, 
                              value = c(2012,2019),
@@ -84,12 +84,12 @@ ui <- fluidPage(
              sidebarLayout(
                sidebarPanel(
                  varSelectInput(inputId = "xvar",
-                                label = "X Axis Stat",
+                                label = "X Axis Stat:",
                                 data = player_data,
                                 selected = "Goals",
                                 multiple = FALSE),
                  varSelectInput(inputId = "yvar",
-                                label = "Y Axis Stat",
+                                label = "Y Axis Stat:",
                                 data = player_data,
                                 selected = "Assists",
                                 multiple = FALSE),
@@ -135,9 +135,11 @@ server <- function(input, output) {
                 color = "green") +
       geom_line(aes(y = !!input$y_var3),
                 color = "red") +
-      scale_x_continuous(limits = input$season) +
+      scale_x_continuous(limits = input$season,
+                         breaks = seq(min(input$season), max(input$season), 1)) +
       labs(y = "") +
-      theme_minimal()
+      theme_minimal() +
+      theme(panel.grid.minor.x = element_blank())
   })
   
     output$scatterplot <- renderPlotly({
