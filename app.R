@@ -5,6 +5,8 @@ library(plotly)
 player_data <- read_csv("Data Sci - MSOC Data - Player Data.csv")
 team_data <- read_csv("Data Sci - MSOC Data - Team Data.csv")
 
+player_list <- as.data.frame(pull(player_data, Player), row.names = "Player")
+
 stats <- t(t(colnames(player_data[3:21])))
 
 
@@ -24,9 +26,9 @@ ui <- fluidPage(
                                  data = player_data,
                                  selected = "Goals",
                                  multiple = FALSE),
-                  textInput("player1", 
-                            "Player 1", 
-                            value = "Burke, Jake"),
+                  selectInput(inputId = "player1", 
+                            label = "Player 1", 
+                            choices = player_list),
                   textInput("player2", 
                             "Player 2", 
                             value = "Spurr, Charlie"),
