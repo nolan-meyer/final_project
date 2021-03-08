@@ -8,7 +8,8 @@ team_data <- read_csv("Data Sci - MSOC Data - Team Data.csv")
 player_list <- as.data.frame(pull(player_data, Player), col.names = "Players:")
 player_list <- unique(player_list)
 player_list <- player_list %>% 
-  rename("Players:" = "pull(player_data, Player)")
+  rename("Players:" = "pull(player_data, Player)") %>% 
+  arrange(`Players:`)
 
 stats <- t(t(colnames(player_data[3:21])))
 
@@ -104,11 +105,11 @@ ui <- fluidPage(
 server <- function(input, output) {
   
   output$players <- DT::renderDataTable(
-    DT::datatable(player_data, options = list(pageLength = 10)
+    DT::datatable(player_data, options = list(pageLength = 8)
   ))
   
   output$teams <- DT::renderDataTable(
-    DT::datatable(team_data, options = list(pageLength = 10)
+    DT::datatable(team_data, options = list(pageLength = 8)
     ))
   
   output$playerplot <- renderPlot({
@@ -122,6 +123,7 @@ server <- function(input, output) {
                 size = 3) +
       scale_x_continuous(limits = input$Season,
                          breaks = seq(min(input$Season), max(input$Season), 1)) +
+      labs(title = "Individual statistics by season") +
       theme_minimal() +
       theme(panel.grid.minor.x = element_blank())
     })
@@ -137,7 +139,7 @@ server <- function(input, output) {
                 color = "red") +
       scale_x_continuous(limits = input$season,
                          breaks = seq(min(input$season), max(input$season), 1)) +
-      labs(y = "") +
+      labs(title = "Team statistics by season", y = "") +
       theme_minimal() +
       theme(panel.grid.minor.x = element_blank())
   })
@@ -150,8 +152,9 @@ server <- function(input, output) {
                    group = Player,
                    label = Season)) +
         geom_jitter() +
-        labs( color = "Season")+
+        labs(color = "Season") +
         theme_minimal()
+      
       ggplotly(p,
                tooltip = c("x", "y", "group", "label"))
         })
