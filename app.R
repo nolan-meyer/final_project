@@ -120,8 +120,10 @@ server <- function(input, output) {
                     color = Player),
                 alpha = 0.6, 
                 size = 3) +
-      scale_x_continuous(limits = input$Season) +
-      theme_minimal() 
+      scale_x_continuous(limits = input$Season,
+                         breaks = seq(min(input$Season), max(input$Season), 1)) +
+      theme_minimal() +
+      theme(panel.grid.minor.x = element_blank())
     })
     
   output$teamplot <- renderPlot({
