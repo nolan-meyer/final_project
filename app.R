@@ -5,7 +5,10 @@ library(plotly)
 player_data <- read_csv("Data Sci - MSOC Data - Player Data.csv")
 team_data <- read_csv("Data Sci - MSOC Data - Team Data.csv")
 
-player_list <- as.data.frame(pull(player_data, Player), row.names = "Player")
+player_list <- as.data.frame(pull(player_data, Player), col.names = "Players:")
+player_list <- unique(player_list)
+player_list %>% 
+  rename("Players:" = "pull(player_data, Player)")
 
 stats <- t(t(colnames(player_data[3:21])))
 
