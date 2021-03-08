@@ -81,7 +81,7 @@ ui <- fluidPage(
                  plotOutput(outputId = "teamplot")))
              )
              ,
-    tabPanel('Scatter Plot',
+    tabPanel('Player Scatter Plots',
              sidebarLayout(
                sidebarPanel(
                  varSelectInput(inputId = "xvar",
