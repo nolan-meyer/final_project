@@ -32,7 +32,8 @@ stats <- stats %>%
 player_list <- as.data.frame(pull(player_data, Player), col.names = c("Players:"))
 player_list <- unique(player_list)
 player_list <- player_list %>% 
-  rename("Players:" = "pull(player_data, Player)")
+  rename("Players:" = "pull(player_data, Player)") %>% 
+  arrange(`Players:`)
 ```
 
 
