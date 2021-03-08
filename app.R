@@ -114,11 +114,6 @@ server <- function(input, output) {
                     color = Player),
                 alpha = 0.6, 
                 size = 3) +
-      geom_text(aes(x = Season,
-                    y = !!input$variables,
-                    label = Player), 
-                hjust = 0,
-                vjust = 0) +
       scale_x_continuous(limits = input$Season) +
       theme_minimal() 
     })
@@ -145,6 +140,7 @@ server <- function(input, output) {
                    group = Player,
                    label = Season)) +
         geom_jitter() +
+        labs( color = "Season")+
         theme_minimal()
       ggplotly(p,
                tooltip = c("x", "y", "group", "label"))
