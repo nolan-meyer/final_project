@@ -46,7 +46,7 @@ ui <- fluidPage(
                               label = "Seasons:",
                               min = 2012, 
                               max = 2019, 
-                              value = c(2012,2019),
+                              value = c(2013,2019),
                               sep = ""),
                submitButton(text = "Create plot")),
                mainPanel(
@@ -154,6 +154,7 @@ server <- function(input, output) {
       labs(title = "Individual statistics by season") +
       theme_minimal() +
       theme(panel.grid.minor.x = element_blank(),
+            panel.grid.minor.y = element_blank(),
             plot.title = element_text(size = 16, face = "bold"))
     })
     
@@ -161,22 +162,29 @@ server <- function(input, output) {
     team_data %>% 
       ggplot(aes(x = Season)) +
       geom_line(aes(y = !!input$y_var1),
-                color = "blue") +
+                color = "blue",
+                size = 2) +
       geom_point(aes(y = !!input$y_var1),
-                color = "blue") +
+                color = "blue",
+                size = 4) +
       geom_line(aes(y = !!input$y_var2),
-                color = "green") +
+                color = "green",
+                size = 2) +
       geom_point(aes(y = !!input$y_var2),
-                color = "green") +
+                color = "green",
+                size = 4) +
       geom_line(aes(y = !!input$y_var3),
-                color = "red") +
+                color = "red",
+                size = 2) +
       geom_point(aes(y = !!input$y_var3),
-                color = "red") +
+                color = "red",
+                size = 4) +
       scale_x_continuous(limits = input$season,
                          breaks = seq(min(input$season), max(input$season), 1)) +
       labs(title = "Team statistics by season", y = "") +
       theme_minimal() +
       theme(panel.grid.minor.x = element_blank(),
+            panel.grid.minor.y = element_blank(),
             plot.title = element_text(size = 16, face = "bold"))
   })
   
@@ -195,7 +203,16 @@ server <- function(input, output) {
                    label = Season)) +
         geom_jitter() +
         labs(color = "") +
-        theme_minimal()
+        theme_minimal() +
+        theme(axis.line = element_line(colour = "black"),
+              panel.grid.major.y = element_blank(),
+              panel.grid.minor.y = element_blank(),
+              panel.grid.major.x = element_blank(),
+              panel.grid.minor.x = element_blank(),
+              axis.text.x = element_text(colour = "black"),
+              axis.text.y = element_text(colour = "black"),
+              panel.border = element_blank(),
+              panel.background = element_blank())
       
       ggplotly(p,
                tooltip = c("x", "y", "group", "label"))
