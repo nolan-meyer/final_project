@@ -94,6 +94,29 @@ ui <- fluidPage(
                                 data = player_data,
                                 selected = "Assists",
                                 multiple = FALSE),
+                 varSelectInput(inputId = "color",
+                                label = "Color by:",
+                                data = player_data,
+                                selected = "Season",
+                                multiple = FALSE),
+                 sliderInput(inputId = "seasons", 
+                             label = "Seasons:",
+                             min = 2012, 
+                             max = 2019, 
+                             value = c(2012,2019),
+                             sep = ""),
+                 sliderInput(inputId = "minutes", 
+                             label = "Minutes Played:",
+                             min = 0, 
+                             max = 2000, 
+                             value = c(250,2000),
+                             sep = ""),
+                 sliderInput(inputId = "games", 
+                             label = "Games Played:",
+                             min = 0, 
+                             max = 21, 
+                             value = c(0,21),
+                             sep = ""),
                  submitButton(text = "Create plot")),
                mainPanel(
                  plotlyOutput(outputId = "scatterplot")
@@ -139,9 +162,15 @@ server <- function(input, output) {
       ggplot(aes(x = Season)) +
       geom_line(aes(y = !!input$y_var1),
                 color = "blue") +
+      geom_point(aes(y = !!input$y_var1),
+                color = "blue") +
       geom_line(aes(y = !!input$y_var2),
                 color = "green") +
+      geom_point(aes(y = !!input$y_var2),
+                color = "green") +
       geom_line(aes(y = !!input$y_var3),
+                color = "red") +
+      geom_point(aes(y = !!input$y_var3),
                 color = "red") +
       scale_x_continuous(limits = input$season,
                          breaks = seq(min(input$season), max(input$season), 1)) +
@@ -153,13 +182,19 @@ server <- function(input, output) {
   
     output$scatterplot <- renderPlotly({
       p <- player_data %>% 
+        filter(Season >= min(input$seasons),
+               Season <= max(input$seasons),
+               `Minutes Played` >= min(input$minutes),
+               `Minutes Played` <= max(input$minutes),
+               `Games Played` >= min(input$games),
+               `Games Played` <= max(input$games)) %>% 
         ggplot(aes(x = !!input$xvar,
                    y = !!input$yvar,
-                   color = factor(Season),
+                   color = !!input$color,
                    group = Player,
                    label = Season)) +
         geom_jitter() +
-        labs(color = "Season") +
+        labs(color = "") +
         theme_minimal()
       
       ggplotly(p,
