@@ -119,13 +119,19 @@ server <- function(input, output) {
       geom_line(aes(x = Season, 
                     y = !!input$variables, 
                     color = Player),
-                alpha = 0.6, 
-                size = 3) +
+                alpha = 0.5, 
+                size = 2.5) +
+      geom_point(aes(x = Season, 
+                     y = !!input$variables, 
+                     color = Player),
+                alpha = 0.75, 
+                size = 4) +
       scale_x_continuous(limits = input$Season,
                          breaks = seq(min(input$Season), max(input$Season), 1)) +
       labs(title = "Individual statistics by season") +
       theme_minimal() +
-      theme(panel.grid.minor.x = element_blank())
+      theme(panel.grid.minor.x = element_blank(),
+            plot.title = element_text(size = 16, face = "bold"))
     })
     
   output$teamplot <- renderPlot({
@@ -141,7 +147,8 @@ server <- function(input, output) {
                          breaks = seq(min(input$season), max(input$season), 1)) +
       labs(title = "Team statistics by season", y = "") +
       theme_minimal() +
-      theme(panel.grid.minor.x = element_blank())
+      theme(panel.grid.minor.x = element_blank(),
+            plot.title = element_text(size = 16, face = "bold"))
   })
   
     output$scatterplot <- renderPlotly({
