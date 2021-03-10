@@ -18,9 +18,26 @@ knitr::opts_chunk$set(echo = TRUE)
 
 #### Introduction to topic/data
 
+All the members in our group play soccer, with three of us on Macalester’s varsity team. Thus we were incredibly interested in incorporating some sort of soccer aspect into our project. We also wanted it to be somewhat specific to our time here at Macalester. Finally, we wanted to challenge ourselves to build our own dataset, and so we did just that. We decided to track Macalester’s men’s soccer team and player statistics for the last few years using a shiny app. After deciding on this, we diverted our attention to finding the necessary data. All the data was available online, we just had to compile data from all seasons dating back to 2012. 
 
 
 #### Research Questions
+Our first research question was:
+-How can we best compare Macalester men’s soccer team statistics across different seasons? 
+    -This would include such statistics as goals scored, goals allowed, assists, shots, etc.
+    -We could also track team performance in general by tracking wins, losses, and draws
+
+We also wanted to add on an individual component as well: 
+-What is the best way to compare different player’s individual statistics across different seasons? 
+    -Such statistics would include goals, assists, minutes logged, yellow/red cards, etc.
+    -Can we compare players that played on the same team?
+    -Can we compare players that never played on the same team? 
+    -Can we track players' progression through their 4 year career? 
+
+We also wanted to make it aesthetically pleasing:
+-What is the most effective way to display this information? 
+    -Would it make sense to aggregate certain aspects of the project? Would it aid in delivering the            information? 
+    -What is the best way to organize the information?
 
 
 
@@ -29,14 +46,75 @@ knitr::opts_chunk$set(echo = TRUE)
 
 #### Data Sources
 
-The data was pulled from the Macalester Athletics website, specifically the Men's Soccer page (https://athletics.macalester.edu/sports/mens-soccer). Within the page there is a tab for statistics, which displays team, individual, game-by-game, and miscellaneous data from 2012-2019. There is also data going back to 2001, but it is limited to game scores.
+The data was pulled from the Macalester Athletics website, specifically the Men's Soccer page as found [here](https://athletics.macalester.edu/sports/mens-soccer).  Within the page there is a tab for statistics, which displays team, individual, game-by-game, and miscellaneous data from 2012-2019. There is also data going back to 2001, but it is limited to game scores.
 
 #### Collection process
 
-To collect the data, we created a shared google sheets where we copied the data from table format on the webpage and pasted it onto our sheet. Some of the individual statistics were broken down into 2 separate variables to better account our ability to display numerical values. The team statistics required a pivot function which we did manually. There were also 4 variables that we calculated, which we thought provided useful additional insight; goals per 90 minutes, assists per 90 minutes, points per 90 minutes, and yellow cards per 90 minutes. 
+To collect the data, we created a shared google sheet where we copied the data from table format on the web page and pasted it onto our sheet. Some of the individual statistics were broken down into 2 separate variables to better account our ability to display numerical values. The team statistics required a pivot function which we did manually. There were also 4 variables that we calculated, which we thought provided useful additional insight; goals per 90 minutes, assists per 90 minutes, points per 90 minutes, and yellow cards per 90 minutes. 
 
 Once all the data cleaning was complete, we downloaded the files as .csv, and uploaded them to R. We had a separate file for individual and team statistics.
 
 ## Manual
 
+**Welcome to the Macalester Men’s Soccer Database**
+
+When you first open the shiny app, it will automatically open to the Player Data screen. At the top of the app, you will see 5 different tabs. Click on one to explore. The section below goes into depth on how to navigate each tab.
+
+**Player Data**
+
+This page displays the raw data for each player. 
+
+On the top left corner there is a tab “Show 8 entries”. If you click on the number 8, you will see a drop down menu. From there you will be able to change the amount of players displayed on the screen at a time. 
+
+On the top right corner there is a search bar where you can search for specific players by typing in their name.
+
+At the bottom right of the screen, you will see the amount of pages. Use the buttons to navigate in between pages. 
+
+Taking a look at the table, you can see all the raw data for each player. To organize by an individual statistic, click on the variable on the top. The first click will show from lowest to highest, and another click will show from highest to lowest. Once you click on another variable, the previous organization is undone. 
+
+At the bottom right of the screen, you will see the amount of pages. Use the buttons to navigate in between pages. 
+
+**Team Data**
+
+This page displays the raw data for each season’s team. 
+
+On the top left corner there is a tab “Show 8 entries”. If you click on the number 8, you will see a drop down menu. From there you will be able to change the amount of teams displayed on the screen at a time. Note: there is only data for 8 teams.
+
+On the top right corner there is a search bar where you can search for specific teams by typing in their season’s year.
+
+At the bottom right of the screen, you will see the amount of pages. Use the buttons to navigate in between pages. 
+
+Taking a look at the table, you can see all the raw data for each team. To organize by an individual statistic, click on the variable on the top. The first click will show from lowest to highest, and another click will show from highest to lowest. Once you click on another variable, the previous organization is undone. 
+
+At the bottom right of the screen, you will see the amount of pages. Use the buttons to navigate in between pages. 
+
+**Player Time Series**
+
+On the left side of the screen there are dropdowns and a slider which are the inputs for the graph you wish to display. The first dropdown is to select the statistic that you want to look at, which includes all of the variables listed on the Player Data table. The following 3 dropdowns are to select the individual players you wish to compare. The slider filters the data to the seasons you wish to look at.
+
+Once finished, click create plot and your plot will be displayed on the right side of the screen.
+
+The plot, located on the right side of the screen, is interactive. Hover over the points to get more data about the data point. Additionally, you can click and drag on the plot to create a box over a specific section of the screen, this will zoom you into that section.
+
+At the top right side of the plot are several buttons with more functions you can perform. Hovering over them will allow you to understand what they do, such as zooming in and out, as well as downloading the plot as a png.
+
+**Team Time Series**
+
+On the left side of the screen there are dropdowns and a slider which are the inputs for the graph you wish to display. The 3 dropdowns are to select the statistics that you want to look at, which includes all of the variables listed on the Team Data table. The slider filters the data to the seasons you wish to look at.
+
+Once finished, click create plot and your plot will be displayed on the right side of the screen.
+
+The plot, located on the right side of the screen, is interactive. Hover over the points to get more data about the data point. Additionally, you can click and drag on the plot to create a box over a specific section of the screen, this will zoom you into that section.
+
+At the top right side of the plot are several buttons with more functions you can perform. Hovering over them will allow you to understand what they do, such as zooming in and out, as well as downloading the plot as a png.
+
+**Player Scatter Plot**
+
+On the left side of the screen there are dropdowns and a slider which are the inputs for the graph you wish to display. The first 2 dropdowns are to select the statistics that you want to look at, which includes all of the variables listed on the Player Data table. The sliders filter the data to the seasons, minutes, and games played that you wish to look at
+
+Once finished, click create plot and your plot will be displayed on the right side of the screen.
+
+The plot, located on the right side of the screen, is interactive. Hover over the points to get more data about the data point. Additionally, you can click and drag on the plot to create a box over a specific section of the screen, this will zoom you into that section.
+
+At the top right side of the plot are several buttons with more functions you can perform. Hovering over them will allow you to understand what they do, such as zooming in and out, as well as downloading the plot as a png.
 
