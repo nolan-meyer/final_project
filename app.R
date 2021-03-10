@@ -54,7 +54,7 @@ ui <- fluidPage(
                               sep = ""),
                submitButton(text = "Create plot")),
                mainPanel(
-                  plotOutput(outputId = "playerplot"))
+                  plotlyOutput(outputId = "playerplot"))
              )),
     tabPanel('Team Time Series',
              sidebarLayout(
@@ -139,8 +139,8 @@ server <- function(input, output) {
     DT::datatable(team_data, options = list(pageLength = 8)
     ))
   
-  output$playerplot <- renderPlot({
-    player_data %>% 
+  output$playerplot <- renderPlotly({
+    p1 <- player_data %>% 
       filter(Player %in% c(input$player1, input$player2, input$player3)) %>% 
       ggplot() +
       geom_line(aes(x = Season, 
@@ -150,7 +150,8 @@ server <- function(input, output) {
                 size = 2.5) +
       geom_point(aes(x = Season, 
                      y = !!input$variables, 
-                     color = Player),
+                     color = Player,
+                     group = Player),
                 alpha = 0.75, 
                 size = 4) +
       scale_x_continuous(limits = input$Season,
@@ -160,6 +161,9 @@ server <- function(input, output) {
       theme(panel.grid.minor.x = element_blank(),
             panel.grid.minor.y = element_blank(),
             plot.title = element_text(size = 16, face = "bold"))
+    
+      ggplotly(p1,
+               tooltip = c("x", "y", "group"))
     })
     
   output$teamplot <- renderPlot({
@@ -193,7 +197,7 @@ server <- function(input, output) {
   })
   
     output$scatterplot <- renderPlotly({
-      p <- player_data %>% 
+      p3 <- player_data %>% 
         filter(Season >= min(input$seasons),
                Season <= max(input$seasons),
                `Minutes Played` >= min(input$minutes),
@@ -218,7 +222,7 @@ server <- function(input, output) {
               panel.border = element_blank(),
               panel.background = element_blank())
       
-      ggplotly(p,
+      ggplotly(p3,
                tooltip = c("x", "y", "group", "label"))
         })
 }
