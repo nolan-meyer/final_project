@@ -147,8 +147,8 @@ server <- function(input, output) {
       geom_line(aes(x = Season, 
                     y = !!input$variables, 
                     color = Player),
-                alpha = 0.75, 
-                size = 2) +
+                alpha = 0.7, 
+                size = 1.75) +
       geom_point(aes(x = Season, 
                      y = !!input$variables, 
                      color = Player,
