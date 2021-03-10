@@ -83,7 +83,7 @@ ui <- fluidPage(
                              sep = ""),
                  submitButton(text = "Create plot")),
                mainPanel(
-                 plotOutput(outputId = "teamplot")))
+                 plotlyOutput(outputId = "teamplot")))
              )
              ,
     tabPanel('Player Scatter Plots',
@@ -147,7 +147,7 @@ server <- function(input, output) {
       geom_line(aes(x = Season, 
                     y = !!input$variables, 
                     color = Player),
-                alpha = 0.7, 
+                alpha = 0.75, 
                 size = 1.75) +
       geom_point(aes(x = Season, 
                      y = !!input$variables, 
@@ -174,34 +174,49 @@ server <- function(input, output) {
                tooltip = c("x", "y", "group"))
     })
     
-  output$teamplot <- renderPlot({
-    team_data %>% 
+  output$teamplot <- renderPlotly({
+    p2 <- team_data %>% 
       ggplot(aes(x = Season)) +
       geom_line(aes(y = !!input$y_var1),
-                color = "blue",
-                size = 2) +
+                color = "#D9514EFF",
+                alpha = 0.75, 
+                size = 1.75) +
       geom_point(aes(y = !!input$y_var1),
-                color = "blue",
-                size = 4) +
+                color = "#D9514EFF",
+                alpha = 0.9, 
+                size = 3) +
       geom_line(aes(y = !!input$y_var2),
-                color = "green",
-                size = 2) +
+                color = "#2A2B2DFF",
+                alpha = 0.75, 
+                size = 1.75) +
       geom_point(aes(y = !!input$y_var2),
-                color = "green",
-                size = 4) +
+                color = "#2A2B2DFF",
+                alpha = 0.9, 
+                size = 3) +
       geom_line(aes(y = !!input$y_var3),
-                color = "red",
-                size = 2) +
+                color = "#2DA8D8FF",
+                alpha = 0.75, 
+                size = 1.75) +
       geom_point(aes(y = !!input$y_var3),
-                color = "red",
-                size = 4) +
+                color = "#2DA8D8FF",
+                alpha = 0.9, 
+                size = 3) +
       scale_x_continuous(limits = input$season,
                          breaks = seq(min(input$season), max(input$season), 1)) +
       labs(title = "Team statistics by season", y = "") +
       theme_minimal() +
-      theme(panel.grid.minor.x = element_blank(),
+      theme(panel.grid.major.x = element_line(color = "grey96", size = 0.2),
+            panel.grid.major.y = element_line(color = "grey96", size = 0.2),
+            panel.grid.minor.x = element_blank(),
             panel.grid.minor.y = element_blank(),
-            plot.title = element_text(size = 16, face = "bold"))
+            axis.text.x = element_text(colour = "black"),
+            axis.text.y = element_text(colour = "black"),
+            plot.title = element_text(size = 16, face = "bold"),
+            panel.background = element_rect(fill = "ivory2"),
+            plot.background = element_rect(fill = "ivory2"))
+    
+    ggplotly(p2,
+             tooltip = c("x", "y"))
   })
   
     output$scatterplot <- renderPlotly({
