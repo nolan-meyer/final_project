@@ -13,7 +13,9 @@ player_list <- player_list %>%
   rename("Players:" = "pull(player_data, Player)") %>% 
   arrange(`Players:`)
 
-stats <- t(t(colnames(player_data[3:21])))
+stats <- as.data.frame(t(t(colnames(player_data[3:21]))))
+stats <- stats %>% 
+  rename("Stats:" = "V1")
 
 
 
