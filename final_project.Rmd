@@ -46,7 +46,7 @@ We also wanted to make it aesthetically pleasing:
 
 #### Data Sources
 
-The data was pulled from the Macalester Athletics website, specifically the Men's Soccer page as found [here](https://athletics.macalester.edu/sports/mens-soccer).  Within the page there is a tab for statistics, which displays team, individual, game-by-game, and miscellaneous data from 2012-2019. There is also data going back to 2001, but it is limited to game scores.
+The data was pulled from the Macalester Athletics website, specifically the Men's Soccer page as found ![here](https://athletics.macalester.edu/sports/mens-soccer).  Within the page there is a tab for statistics, which displays team, individual, game-by-game, and miscellaneous data from 2012-2019. There is also data going back to 2001, but it is limited to game scores.
 
 #### Collection process
 
