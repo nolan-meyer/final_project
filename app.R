@@ -3,6 +3,7 @@ library(tidyverse)
 library(plotly)
 library(googlesheets4)
 library(rsconnect)
+library(wesanderson)
 
 player_data <- read_csv("Data Sci - MSOC Data - Player Data.csv")
 team_data <- read_csv("Data Sci - MSOC Data - Team Data.csv")
@@ -146,27 +147,28 @@ server <- function(input, output) {
       geom_line(aes(x = Season, 
                     y = !!input$variables, 
                     color = Player),
-                alpha = 0.6, 
+                alpha = 0.75, 
                 size = 2) +
       geom_point(aes(x = Season, 
                      y = !!input$variables, 
                      color = Player,
                      group = Player),
-                alpha = 0.75, 
+                alpha = 0.9, 
                 size = 3) +
       scale_x_continuous(limits = input$Season,
                          breaks = seq(min(input$Season), max(input$Season), 1)) +
+      scale_color_manual(values = c("#D9514EFF", "#2A2B2DFF", "#2DA8D8FF")) +
       labs(title = "Individual statistics by season") +
       theme_minimal() +
-      theme(panel.grid.major.x = element_line(color = "grey95", size = 0.2),
-            panel.grid.major.y = element_line(color = "grey95", size = 0.2),
+      theme(panel.grid.major.x = element_line(color = "grey96", size = 0.2),
+            panel.grid.major.y = element_line(color = "grey96", size = 0.2),
             panel.grid.minor.x = element_blank(),
             panel.grid.minor.y = element_blank(),
             axis.text.x = element_text(colour = "black"),
             axis.text.y = element_text(colour = "black"),
             plot.title = element_text(size = 16, face = "bold"),
-            panel.background = element_rect(fill = "ivory1"),
-            plot.background = element_rect(fill = "ivory1"))
+            panel.background = element_rect(fill = "ivory2"),
+            plot.background = element_rect(fill = "ivory2"))
     
       ggplotly(p1,
                tooltip = c("x", "y", "group"))
