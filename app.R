@@ -146,21 +146,27 @@ server <- function(input, output) {
       geom_line(aes(x = Season, 
                     y = !!input$variables, 
                     color = Player),
-                alpha = 0.5, 
-                size = 2.5) +
+                alpha = 0.6, 
+                size = 2) +
       geom_point(aes(x = Season, 
                      y = !!input$variables, 
                      color = Player,
                      group = Player),
                 alpha = 0.75, 
-                size = 4) +
+                size = 3) +
       scale_x_continuous(limits = input$Season,
                          breaks = seq(min(input$Season), max(input$Season), 1)) +
       labs(title = "Individual statistics by season") +
       theme_minimal() +
-      theme(panel.grid.minor.x = element_blank(),
+      theme(panel.grid.major.x = element_line(color = "grey95", size = 0.2),
+            panel.grid.major.y = element_line(color = "grey95", size = 0.2),
+            panel.grid.minor.x = element_blank(),
             panel.grid.minor.y = element_blank(),
-            plot.title = element_text(size = 16, face = "bold"))
+            axis.text.x = element_text(colour = "black"),
+            axis.text.y = element_text(colour = "black"),
+            plot.title = element_text(size = 16, face = "bold"),
+            panel.background = element_rect(fill = "ivory1"),
+            plot.background = element_rect(fill = "ivory1"))
     
       ggplotly(p1,
                tooltip = c("x", "y", "group"))
