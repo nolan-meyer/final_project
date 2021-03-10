@@ -12,29 +12,8 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r libraries}
-library(tidyverse)
-library(googlesheets4)
-library(rsconnect)
-```
-
 
 ## Introduction
-
-```{r}
-player_data <- read_csv("Data Sci - MSOC Data - Player Data.csv")
-team_data <- read_csv("Data Sci - MSOC Data - Team Data.csv")
-
-stats <- as.data.frame(t(t(colnames(player_data[3:21]))))
-stats <- stats %>% 
-  rename("Stats:" = "V1")
-
-player_list <- as.data.frame(pull(player_data, Player), col.names = c("Players:"))
-player_list <- unique(player_list)
-player_list <- player_list %>% 
-  rename("Players:" = "pull(player_data, Player)") %>% 
-  arrange(`Players:`)
-```
 
 
 #### Introduction to topic/data
@@ -52,6 +31,6 @@ player_list <- player_list %>%
 
 
 
-## Analysis
+## Manual
 
 
