@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Nolan, Omar, Ben, Pablo" />
+<meta name="author" content="Nolan Meyer, Ben Wagner, Omar Anwar, Pablo Monterroso" />
 
 
 <title>Insert title</title>
@@ -1768,7 +1768,7 @@ summary {
 
 
 <h1 class="title toc-ignore">Insert title</h1>
-<h4 class="author">Nolan, Omar, Ben, Pablo</h4>
+<h4 class="author">Nolan Meyer, Ben Wagner, Omar Anwar, Pablo Monterroso</h4>
 
 </div>
 
@@ -1786,16 +1786,19 @@ summary {
 <h2>Data Collection</h2>
 <div id="data-sources" class="section level4">
 <h4>Data Sources</h4>
+<p>The data was pulled from the Macalester Athletics website, specifically the Men’s Soccer page (<a href="https://athletics.macalester.edu/sports/mens-soccer" class="uri">https://athletics.macalester.edu/sports/mens-soccer</a>). Within the page there is a tab for statistics, which displays team, individual, game-by-game, and miscellaneous data from 2012-2019. There is also data going back to 2001, but it is limited to game scores.</p>
 </div>
 <div id="collection-process" class="section level4">
 <h4>Collection process</h4>
+<p>To collect the data, we created a shared google sheets where we copied the data from table format on the webpage and pasted it onto our sheet. Some of the individual statistics were broken down into 2 separate variables to better account our ability to display numerical values. The team statistics required a pivot function which we did manually. There were also 4 variables that we calculated, which we thought provided useful additional insight; goals per 90 minutes, assists per 90 minutes, points per 90 minutes, and yellow cards per 90 minutes.</p>
+<p>Once all the data cleaning was complete, we downloaded the files as .csv, and uploaded them to R. We had a separate file for individual and team statistics.</p>
 </div>
 </div>
-<div id="analysis" class="section level2">
-<h2>Analysis</h2>
+<div id="manual" class="section level2">
+<h2>Manual</h2>
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiSW5zZXJ0IHRpdGxlIgphdXRob3I6ICJOb2xhbiwgT21hciwgQmVuLCBQYWJsbyIKb3V0cHV0OiAKICBodG1sX2RvY3VtZW50OgogICAgZGZfcHJpbnQ6IHBhZ2VkCiAgICBjb2RlX2Rvd25sb2FkOiB0cnVlCiAgICB0aGVtZTogY2VydWxlYW4KLS0tCgpgYGB7ciBzZXR1cCwgaW5jbHVkZT1GQUxTRX0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KGVjaG8gPSBUUlVFKQpgYGAKCgojIyBJbnRyb2R1Y3Rpb24KCgojIyMjIEludHJvZHVjdGlvbiB0byB0b3BpYy9kYXRhCgojIyMjIFJlc2VhcmNoIFF1ZXN0aW9ucwoKCgojIyBEYXRhIENvbGxlY3Rpb24KCgojIyMjIERhdGEgU291cmNlcwoKIyMjIyBDb2xsZWN0aW9uIHByb2Nlc3MKCgoKIyMgQW5hbHlzaXMKCmBgYHtyfQoKYGBgCgo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiSW5zZXJ0IHRpdGxlIgphdXRob3I6ICJOb2xhbiBNZXllciwgQmVuIFdhZ25lciwgT21hciBBbndhciwgUGFibG8gTW9udGVycm9zbyIKb3V0cHV0OiAKICBodG1sX2RvY3VtZW50OgogICAgZGZfcHJpbnQ6IHBhZ2VkCiAgICBjb2RlX2Rvd25sb2FkOiB0cnVlCiAgICB0aGVtZTogY2VydWxlYW4KLS0tCgpgYGB7ciBzZXR1cCwgaW5jbHVkZT1GQUxTRX0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KGVjaG8gPSBUUlVFKQpgYGAKCgojIyBJbnRyb2R1Y3Rpb24KCgojIyMjIEludHJvZHVjdGlvbiB0byB0b3BpYy9kYXRhCgoKCiMjIyMgUmVzZWFyY2ggUXVlc3Rpb25zCgoKCiMjIERhdGEgQ29sbGVjdGlvbgoKCiMjIyMgRGF0YSBTb3VyY2VzCgpUaGUgZGF0YSB3YXMgcHVsbGVkIGZyb20gdGhlIE1hY2FsZXN0ZXIgQXRobGV0aWNzIHdlYnNpdGUsIHNwZWNpZmljYWxseSB0aGUgTWVuJ3MgU29jY2VyIHBhZ2UgKGh0dHBzOi8vYXRobGV0aWNzLm1hY2FsZXN0ZXIuZWR1L3Nwb3J0cy9tZW5zLXNvY2NlcikuIFdpdGhpbiB0aGUgcGFnZSB0aGVyZSBpcyBhIHRhYiBmb3Igc3RhdGlzdGljcywgd2hpY2ggZGlzcGxheXMgdGVhbSwgaW5kaXZpZHVhbCwgZ2FtZS1ieS1nYW1lLCBhbmQgbWlzY2VsbGFuZW91cyBkYXRhIGZyb20gMjAxMi0yMDE5LiBUaGVyZSBpcyBhbHNvIGRhdGEgZ29pbmcgYmFjayB0byAyMDAxLCBidXQgaXQgaXMgbGltaXRlZCB0byBnYW1lIHNjb3Jlcy4KCiMjIyMgQ29sbGVjdGlvbiBwcm9jZXNzCgpUbyBjb2xsZWN0IHRoZSBkYXRhLCB3ZSBjcmVhdGVkIGEgc2hhcmVkIGdvb2dsZSBzaGVldHMgd2hlcmUgd2UgY29waWVkIHRoZSBkYXRhIGZyb20gdGFibGUgZm9ybWF0IG9uIHRoZSB3ZWJwYWdlIGFuZCBwYXN0ZWQgaXQgb250byBvdXIgc2hlZXQuIFNvbWUgb2YgdGhlIGluZGl2aWR1YWwgc3RhdGlzdGljcyB3ZXJlIGJyb2tlbiBkb3duIGludG8gMiBzZXBhcmF0ZSB2YXJpYWJsZXMgdG8gYmV0dGVyIGFjY291bnQgb3VyIGFiaWxpdHkgdG8gZGlzcGxheSBudW1lcmljYWwgdmFsdWVzLiBUaGUgdGVhbSBzdGF0aXN0aWNzIHJlcXVpcmVkIGEgcGl2b3QgZnVuY3Rpb24gd2hpY2ggd2UgZGlkIG1hbnVhbGx5LiBUaGVyZSB3ZXJlIGFsc28gNCB2YXJpYWJsZXMgdGhhdCB3ZSBjYWxjdWxhdGVkLCB3aGljaCB3ZSB0aG91Z2h0IHByb3ZpZGVkIHVzZWZ1bCBhZGRpdGlvbmFsIGluc2lnaHQ7IGdvYWxzIHBlciA5MCBtaW51dGVzLCBhc3Npc3RzIHBlciA5MCBtaW51dGVzLCBwb2ludHMgcGVyIDkwIG1pbnV0ZXMsIGFuZCB5ZWxsb3cgY2FyZHMgcGVyIDkwIG1pbnV0ZXMuIAoKT25jZSBhbGwgdGhlIGRhdGEgY2xlYW5pbmcgd2FzIGNvbXBsZXRlLCB3ZSBkb3dubG9hZGVkIHRoZSBmaWxlcyBhcyAuY3N2LCBhbmQgdXBsb2FkZWQgdGhlbSB0byBSLiBXZSBoYWQgYSBzZXBhcmF0ZSBmaWxlIGZvciBpbmRpdmlkdWFsIGFuZCB0ZWFtIHN0YXRpc3RpY3MuCgojIyBNYW51YWwKCgo=</div>
 
 
 
