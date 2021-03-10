@@ -235,6 +235,7 @@ server <- function(input, output) {
         geom_jitter() +
         labs(color = "") +
         theme_minimal() +
+        scale_color_viridis_c(option = "A") +
         theme(axis.line = element_line(colour = "black"),
               panel.grid.major.y = element_blank(),
               panel.grid.minor.y = element_blank(),
@@ -243,7 +244,8 @@ server <- function(input, output) {
               axis.text.x = element_text(colour = "black"),
               axis.text.y = element_text(colour = "black"),
               panel.border = element_blank(),
-              panel.background = element_blank())
+              panel.background = element_rect(fill = "snow2"),
+              plot.background = element_rect(fill = "snow2"))
       
       ggplotly(p3,
                tooltip = c("x", "y", "group", "label"))
