@@ -18,6 +18,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 #### Introduction to topic/data
 
+
+
 #### Research Questions
 
 
@@ -27,9 +29,13 @@ knitr::opts_chunk$set(echo = TRUE)
 
 #### Data Sources
 
+The data was pulled from the Macalester Athletics website, specifically the Men's Soccer page (https://athletics.macalester.edu/sports/mens-soccer). Within the page there is a tab for statistics, which displays team, individual, game-by-game, and miscellaneous data from 2012-2019. There is also data going back to 2001, but it is limited to game scores.
+
 #### Collection process
 
+To collect the data, we created a shared google sheets where we copied the data from table format on the webpage and pasted it onto our sheet. Some of the individual statistics were broken down into 2 separate variables to better account our ability to display numerical values. The team statistics required a pivot function which we did manually. There were also 4 variables that we calculated, which we thought provided useful additional insight; goals per 90 minutes, assists per 90 minutes, points per 90 minutes, and yellow cards per 90 minutes. 
 
+Once all the data cleaning was complete, we downloaded the files as .csv, and uploaded them to R. We had a separate file for individual and team statistics.
 
 ## Manual
 
