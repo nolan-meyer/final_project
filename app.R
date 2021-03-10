@@ -1,6 +1,8 @@
 library(shiny)
 library(tidyverse)
 library(plotly)
+library(googlesheets4)
+library(rsconnect)
 
 player_data <- read_csv("Data Sci - MSOC Data - Player Data.csv")
 team_data <- read_csv("Data Sci - MSOC Data - Team Data.csv")
