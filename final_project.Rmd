@@ -1,6 +1,6 @@
 ---
 title: "Insert title"
-author: "Nolan, Omar, Ben, Pablo"
+author: "Nolan Meyer, Ben Wagner, Omar Anwar, Pablo Monterroso"
 output: 
   html_document:
     df_print: paged
