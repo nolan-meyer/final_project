@@ -56,6 +56,8 @@ Once all the data cleaning was complete, we downloaded the files as .csv, and up
 
 ## Manual
 
+[Link to shiny app](https://nolanmeyer.shinyapps.io/DataSciFinalProjMSOC/)
+
 **Welcome to the Macalester Men’s Soccer Database**
 
 When you first open the shiny app, it will automatically open to the Player Data screen. At the top of the app, you will see 5 different tabs. Click on one to explore. The section below goes into depth on how to navigate each tab.
