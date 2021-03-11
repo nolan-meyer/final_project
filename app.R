@@ -219,6 +219,7 @@ server <- function(input, output) {
              tooltip = c("x", "y"))
   })
   
+    
     output$scatterplot <- renderPlotly({
       p3 <- player_data %>% 
         filter(Season >= min(input$seasons),
@@ -231,9 +232,9 @@ server <- function(input, output) {
                    y = !!input$yvar,
                    color = !!input$color,
                    group = Player,
-                   label = Season)) +
+                   label = Season,
+                   title = paste(!!input$yvar, !!input$xvar, sep = " vs. "))) +
         geom_jitter() +
-        labs(color = "") +
         theme_minimal() +
         scale_color_viridis_c(option = "A") +
         theme(axis.line = element_line(colour = "black"),
