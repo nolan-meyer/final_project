@@ -56,7 +56,9 @@ Once all the data cleaning was complete, we downloaded the files as .csv, and up
 
 ## Manual
 
-[Link to shiny app](https://nolanmeyer.shinyapps.io/DataSciFinalProjMSOC/)
+[Shiny App Link](https://nolanmeyer.shinyapps.io/DataSciFinalProjMSOC/)
+
+[GitHub Repo Link](https://github.com/nolan-meyer/final_project)
 
 **Welcome to the Macalester Men’s Soccer Database**
 
