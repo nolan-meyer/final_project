@@ -1,5 +1,5 @@
 ---
-title: "Insert title"
+title: "Data Science Final: Creating a Mac Soccer Shiny App"
 author: "Nolan Meyer, Ben Wagner, Omar Anwar, Pablo Monterroso"
 output: 
   html_document:
