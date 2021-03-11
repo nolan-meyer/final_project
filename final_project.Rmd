@@ -18,7 +18,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 #### Introduction to topic/data
 
-All the members in our group play soccer, with three of us on Macalester’s varsity team. Thus we were incredibly interested in incorporating some sort of soccer aspect into our project. We also wanted it to be somewhat specific to our time here at Macalester. Finally, we wanted to challenge ourselves to build our own dataset, and so we did just that. We decided to track Macalester’s men’s soccer team and player statistics for the last few years using a shiny app. After deciding on this, we diverted our attention to finding the necessary data. All the data was available online, we just had to compile data from all seasons dating back to 2012. 
+All the members in our group play soccer, with three of us on Macalester’s varsity team. Thus we were incredibly interested in incorporating some sort of soccer aspect into our project. We also wanted it to be somewhat specific to our time here at Macalester. Finally, we wanted to challenge ourselves to build our own dataset, and so we did just that. We decided to track Macalester’s men’s soccer team and player statistics for the last few years using a shiny app. After deciding on this, we diverted our attention to finding the necessary data. All the data was available online, we just had to compile data from all seasons dating back to 2012.
 
 
 #### Research Questions
