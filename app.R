@@ -102,7 +102,7 @@ ui <- fluidPage(
                  varSelectInput(inputId = "color",
                                 label = "Color by:",
                                 data = player_data,
-                                selected = "Season",
+                                selected = "Points Per 90",
                                 multiple = FALSE),
                  sliderInput(inputId = "seasons", 
                              label = "Seasons:",
@@ -166,7 +166,7 @@ server <- function(input, output) {
             panel.grid.minor.y = element_blank(),
             axis.text.x = element_text(colour = "black"),
             axis.text.y = element_text(colour = "black"),
-            plot.title = element_text(size = 16, face = "bold"),
+            plot.title = element_text(size = 15, face = "bold"),
             panel.background = element_rect(fill = "ivory2"),
             plot.background = element_rect(fill = "ivory2"))
     
@@ -211,7 +211,7 @@ server <- function(input, output) {
             panel.grid.minor.y = element_blank(),
             axis.text.x = element_text(colour = "black"),
             axis.text.y = element_text(colour = "black"),
-            plot.title = element_text(size = 16, face = "bold"),
+            plot.title = element_text(size = 15, face = "bold"),
             panel.background = element_rect(fill = "ivory2"),
             plot.background = element_rect(fill = "ivory2"))
     
@@ -232,10 +232,10 @@ server <- function(input, output) {
                    y = !!input$yvar,
                    color = !!input$color,
                    group = Player,
-                   label = Season,
-                   title = paste(!!input$yvar, !!input$xvar, sep = " vs. "))) +
+                   label = Season)) +
         geom_jitter() +
         theme_minimal() +
+        labs(title = "Statistical Relationships") +
         scale_color_viridis_c(option = "A") +
         theme(axis.line = element_line(colour = "black"),
               panel.grid.major.y = element_blank(),
@@ -246,10 +246,10 @@ server <- function(input, output) {
               axis.text.y = element_text(colour = "black"),
               panel.border = element_blank(),
               panel.background = element_rect(fill = "snow2"),
-              plot.background = element_rect(fill = "snow2"))
+              plot.background = element_rect(fill = "snow2"),
+              plot.title = element_text(size = 15, face = "bold"))
       
-      ggplotly(p3,
-               tooltip = c("x", "y", "group", "label"))
+      ggplotly(p3)
         })
 }
 
